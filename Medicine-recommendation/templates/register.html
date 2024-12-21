@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Registration</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .container {
+            max-width: 500px;
+            margin: 100px auto;
+            background-color: #333;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .captcha {
+            display: flex;
+            align-items: center;
+        }
+        .captcha img {
+            margin-right: 10px;
+        }
+        .refresh-captcha {
+            cursor: pointer;
+            text-decoration: underline;
+            color: #28a745;
+        }
+        .refresh-captcha:hover {
+            color: #ffffff;
+        }
+        .btn-primary {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-primary:hover {
+            background-color: #218838;
+            border-color: #218838;
+        }
+        .btn-primary:focus {
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+        }
+        /* Styling for the captcha display box */
+        #captchaDisplay {
+            background-color: #444;
+            color: #28a745;
+            border: 1px solid #28a745;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">Patient Registration</h2>
+        <form id="registrationForm" action="/Medicine-recommendation/templates/register.html" method="POST">
+            <div class="form-group">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number" required>
+            </div>
+            <div class="form-group">
+                <input type="number" class="form-control" id="age" name="age" placeholder="Age" required>
+            </div>
+            <div class="form-group">
+                <select class="form-control" id="gender" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="location" name="location" placeholder="Location" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                <small id="passwordHelp" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group captcha">
+                <input type="text" class="form-control" id="captcha" name="captcha" placeholder="Enter Captcha" required>
+                <!-- Separate text box to display generated captcha -->
+                <input type="text" class="form-control" id="captchaDisplay" readonly>
+                <a href="#" class="refresh-captcha" id="refreshCaptcha">Refresh</a>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+        
+    </div>
+
+    <script>
+        // Function to generate a random captcha
+        function generateCaptcha() {
+            var captcha = '';
+            var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            for (var i = 0; i < 6; i++) {
+                captcha += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            return captcha;
+        }
+
+        // Function to refresh captcha
+        function refreshCaptcha() {
+            var captcha = generateCaptcha();
+            document.getElementById('captcha').value = '';
+            document.getElementById('captchaDisplay').value = captcha;
+        }
+
+        // Event listener for refresh captcha link
+        document.getElementById('refreshCaptcha').addEventListener('click', function(event) {
+            event.preventDefault();
+            refreshCaptcha();
+        });
+
+        // Form submit event listener
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            var captcha = document.getElementById('captcha').value;
+            var captchaDisplay = document.getElementById('captchaDisplay').value;
+            if (password !== confirmPassword) {
+                event.preventDefault();
+                document.getElementById('passwordHelp').innerText = 'Passwords do not match';
+                document.getElementById('passwordHelp').style.color = 'white'; // Light color
+
+            } else if (captcha !== captchaDisplay) { // Verify captcha
+                event.preventDefault();
+                document.getElementById('passwordHelp').innerText = 'Incorrect Captcha';
+            }
+        });
+
+        // Initial captcha generation on page load
+        window.onload = function() {
+            refreshCaptcha();
+        };
+    </script>
+</body>
+</html>

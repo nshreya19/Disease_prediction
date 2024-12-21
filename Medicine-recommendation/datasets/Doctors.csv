@@ -1,0 +1,11 @@
+Disease,Doctor_Name,Specialty,Contact_Info,Is_Available_Now,When_Available_If_Not,Doctor_photo
+Fungal infection,Dr. Alice Smith,Dermatologist,alice@example.com,Yes,,doctor_photo1.jpg
+Allergy,Dr. John Doe,Allergist,john@example.com,No,Tomorrow 10 AM,doctor_photo2.jpg
+GERD,Dr. Maria Garcia,Gastroenterologist,maria@example.com,Yes,,doctor_photo3.jpg
+Chronic cholestasis,Dr. David Brown,Hepatologist,david@example.com,No,Monday 9 AM,doctor_photo4.jpg
+Drug Reaction,Dr. James Wilson,Pharmacologist,james@example.com,Yes,,doctor_photo5.jpg
+Peptic ulcer disease,Dr. Linda Martinez,Gastroenterologist,linda@example.com,No,Wednesday 2 PM,doctor_photo6.jpg
+AIDS,Dr. Michael Davis,Infectious Disease Specialist,michael@example.com,Yes,,doctor_photo7.jpg
+Diabetes,Dr. Sarah Lee,Endocrinologist,sarah@example.com,No,Thursday 11 AM,doctor_photo8.jpg
+Gastroenteritis,Dr. Robert Taylor,Gastroenterologist,robert@example.com,Yes,,doctor_photo9.jpg
+Bronchial Asthma,Dr. Barbara Jones,Pulmonologist,barbara@example.com,No,Friday 3 PM,doctor_photo10.jpg
